@@ -1,80 +1,79 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swift Sync - Loadstring</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swift Sync - Loadstring</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">Swift Sync</div>
-            <div class="search-bar">
-                <input type="text" placeholder="Pesquisar...">
-                <button>Buscar</button>
-            </div>
-            <div class="social-icons">
-                <a href="#" class="social-icon">YT</a>
-                <a href="#" class="social-icon">DC</a>
-                <a href="#" class="social-icon">GH</a>
-            </div>
-        </header>
+  <div class="container">
+    <header>
+      <div class="logo">Swift Sync</div>
+      <div class="search-bar">
+        <input type="text" placeholder="Pesquisar..." />
+        <button>Buscar</button>
+      </div>
+      <div class="social-icons">
+        <a href="#" class="social-icon">YT</a>
+        <a href="#" class="social-icon">DC</a>
+        <a href="#" class="social-icon">GH</a>
+      </div>
+    </header>
 
-        <nav>
-            <ul class="nav-list">
-                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="Executores.html" class="nav-link">Executores</a></li>
-                <li class="nav-item"><a href="Loadstring.html" class="nav-link active">Loadstring</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Scripts</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Influencers</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">FlappyBird</a></li>
-            </ul>
-        </nav>
+    <nav>
+      <ul class="nav-list">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="Executores.html" class="nav-link">Executores</a></li>
+        <li class="nav-item"><a href="Loadstring.html" class="nav-link active">Loadstring</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Scripts</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Influencers</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">FlappyBird</a></li>
+      </ul>
+    </nav>
 
-        <div class="page-content">
-            <h2>Conversor Loadstring</h2>
-            <p>Cole seu script abaixo para convertê-lo em loadstring:</p>
-            
-            <div class="loadstring-container">
-                <textarea class="loadstring-input" placeholder="Cole seu script aqui..."></textarea>
-                <button class="loadstring-btn" id="convert-btn">Converter para Loadstring</button>
-                <div class="loadstring-output" id="output">O loadstring aparecerá aqui...</div>
-                <button class="loadstring-btn" id="copy-btn">Copiar Loadstring</button>
-            </div>
-        </div>
+    <div class="page-content">
+      <h2>Gerador de Loadstring</h2>
+      <p>Cole o link do seu script Raw (GitHub) abaixo:</p>
 
-        <footer>
-            <p>&copy; 2023 Swift Sync. Todos os direitos reservados.</p>
-        </footer>
+      <div class="loadstring-container">
+        <textarea class="loadstring-input" placeholder="https://raw.githubusercontent.com/SeuUser/SeuRepo/main/script.lua"></textarea>
+        <button class="loadstring-btn" id="convert-btn">Gerar Loadstring</button>
+        <div class="loadstring-output" id="output">O loadstring vai aparecer aqui...</div>
+        <button class="loadstring-btn" id="copy-btn">Copiar Loadstring</button>
+      </div>
     </div>
 
-    <script>
-        document.getElementById('convert-btn').addEventListener('click', function() {
-            const input = document.querySelector('.loadstring-input').value;
-            if (input.trim() === '') {
-                alert('Por favor, insira um script para converter.');
-                return;
-            }
-            
-            // Codifica o script para formato de loadstring
-            const encodedScript = encodeURIComponent(input);
-            const loadstring = `loadstring(game:HttpGet("https://raw.githubusercontent.com/your-repo/main/script.lua?script=${encodedScript}"))()`;
-            
-            document.getElementById('output').textContent = loadstring;
-        });
-        
-        document.getElementById('copy-btn').addEventListener('click', function() {
-            const output = document.getElementById('output');
-            const range = document.createRange();
-            range.selectNode(output);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-            document.execCommand('copy');
-            window.getSelection().removeAllRanges();
-            
-            alert('Loadstring copiado para a área de transferência!');
-        });
-    </script>
+    <footer>
+      <p>&copy; 2025 Swift Sync. Todos os direitos reservados.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('convert-btn').addEventListener('click', function() {
+      const url = document.querySelector('.loadstring-input').value.trim();
+
+      if (!url.startsWith('http') || !url.includes('githubusercontent.com')) {
+        alert('Por favor, insira um link válido de Raw do GitHub!');
+        return;
+      }
+
+      const loadstringText = `loadstring(game:HttpGet("${url}"))()`;
+      document.getElementById('output').textContent = loadstringText;
+    });
+
+    document.getElementById('copy-btn').addEventListener('click', function() {
+      const output = document.getElementById('output');
+      const range = document.createRange();
+      range.selectNode(output);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      document.execCommand('copy');
+      window.getSelection().removeAllRanges();
+
+      alert('Loadstring copiado!');
+    });
+  </script>
 </body>
 </html>
+
